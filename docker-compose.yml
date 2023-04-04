@@ -5,5 +5,3 @@ services:
         image: frontend
         ports:
           - "8000:80"
-        volumes:
-            - ./frontend/index.html
