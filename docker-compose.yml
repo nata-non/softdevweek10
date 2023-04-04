@@ -6,4 +6,4 @@ services:
         ports:
             - 8000:80
         volumes:
-            - ./frontend/index.html/usr/share/nginx/html
+            - ./frontend/usr/share/nginx/html
