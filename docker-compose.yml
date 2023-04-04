@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-    client:
-        image: nginx
+      web:
+        image: static_app
         ports:
-            - 8000:80
+          - "8000:80"
         volumes:
             - ./frontend/index.html
