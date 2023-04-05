@@ -1,2 +1,2 @@
-FROM nginx:latest
-COPY . /usr/share/nginx/app/
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
