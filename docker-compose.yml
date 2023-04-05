@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-      web:
-        image: static_app
-        ports:
-          - "8000:80"
+      frontend:
+      image: ./frontend
+      ports:
+        - "8000:80"
