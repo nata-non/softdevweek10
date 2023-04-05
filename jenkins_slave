@@ -17,10 +17,6 @@ pipeline {
         stage('Pull') {
             steps {
                 dir('softdevweek10') {
-                  sh "docker stop ${DOCKER_CONTAINER_NAME_FRONTEND}"
-                  sh "docker remove ${DOCKER_CONTAINER_NAME_FRONTEND}"
-                  sh "docker stop ${DOCKER_CONTAINER_NAME_BACKEND}"
-                  sh "docker remove ${DOCKER_CONTAINER_NAME_FRONTEND}"
                   sh "docker pull ${DOCKER_IMAGE_NAME_BACKEND}"
                   sh "docker pull ${DOCKER_IMAGE_NAME_FRONTEND}"
                 }
