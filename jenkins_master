@@ -2,17 +2,45 @@ pipeline {
     agent any
 
     stages {
-        
-        stage('Welcome to master'){
-            steps{
-                echo 'Start Program'
+        stage('Initialize Stage') {
+            steps {
+                dir('softdevweek10') {
+                    sh 'docker-compose down --rmi all --volumes || true'
+                }
             }
         }
 
-        stage('Tigger the Slave Jobs') {
+
+        stage('Build Stage') {
             steps {
-                echo 'Start Trigger to send name and age to slave'
-                build job: 'slave', parameters: [string(name: 'NAME', value: "natanon"), string(name: 'Ages', value: "21")]
+                dir('softdevweek10') {
+                    sh "docker-compose build"
+                }
+            }
+        }
+
+        stage('Push Image Na') {
+            steps {
+                dir('softdevweek10') {
+                    withCredentials(
+                        [usernamePassword(
+                            credentialsId: 'docker',
+                            passwordVariable: 'DOCKER_PASSWORD',
+                            usernameVariable: 'DOCKER_USERNAME'
+                        )]
+                    ) {
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    }
+                    sh 'docker push natanon/frontend'
+                    sh 'docker push natanon/backend'
+                }
+            }
+        }
+
+        stage('Do Your Job Slave') {
+            steps {
+                echo 'Triggering ...'
+                build job: 'slave'
             }
         }
     }
